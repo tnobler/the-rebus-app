@@ -1,0 +1,45 @@
+# CREATE
+
+var csrfToken = document.querySelector('[name=csrf-token]')
+fetch('http://localhost:3000/api/v1/properties', {
+  credentials: 'include',
+  headers: {
+    accept: 'application/json, text/plain, */*',
+    'accept-language': 'en-US,en;q=0.9',
+    'cache-control': 'no-cache',
+    'content-type': 'application/json;charset=UTF-8',
+    pragma: 'no-cache',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'x-csrf-token': csrfToken.content,
+  },
+  referrer: 'http://localhost:3000/',
+  referrerPolicy: 'strict-origin-when-cross-origin',
+  body: '{"property":{"name":"Aspen", "street_address":"6150 W Tidwell", "city":"Houston", "state":"Texas", "zipcode":"77092", "unit_count":"209", "year_built":"1974", "ae_flood_zone":false, "msa":"Houston", "submarket":"Greater Inwood", "broker":"Chase Tucker", "analysis_year":"2018", "asking_price":"12500000", "price_per_unit":"59808", "offer_price":"12355000", "sales_price":"12355000", "notes":"Property was brought to us by Chase through Chris", "status":"Own"}}',
+  method: 'POST',
+  mode: 'cors',
+})
+
+# CREATE UNSUCCESSFUL
+
+var csrfToken = document.querySelector('[name=csrf-token]')
+fetch('http://localhost:3000/api/v1/properties', {
+  credentials: 'include',
+  headers: {
+    accept: 'application/json, text/plain, */*',
+    'accept-language': 'en-US,en;q=0.9',
+    'cache-control': 'no-cache',
+    'content-type': 'application/json;charset=UTF-8',
+    pragma: 'no-cache',
+    'sec-fetch-dest': 'empty',
+    'sec-fetch-mode': 'cors',
+    'sec-fetch-site': 'same-origin',
+    'x-csrf-token': csrfToken.content,
+  },
+  referrer: 'http://localhost:3000/',
+  referrerPolicy: 'strict-origin-when-cross-origin',
+  body: '{"property":{"name":"", "street_address":"6150 W Tidwell", "city":"Houston", "state":"Texas", "zipcode":"77092", "unit_count":"209", "year_built":"1974", "ae_flood_zone":false, "msa":"Houston", "submarket":"Greater Inwood", "broker":"Chase Tucker", "analysis_year":"2018", "asking_price":"12500000", "price_per_unit":"59808", "offer_price":"12355000", "sales_price":"12355000", "notes":"Property was brought to us by Chase through Chris", "status":"Own"}}',
+  method: 'POST',
+  mode: 'cors',
+})
