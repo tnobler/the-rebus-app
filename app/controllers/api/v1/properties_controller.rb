@@ -1,6 +1,7 @@
 class Api::V1::PropertiesController < ApplicationController
   before_action :set_property, only: [:show, :edit, :update, :destroy]
   def index
+    @properties = Property.all
   end
   def show
   end
