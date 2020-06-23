@@ -32,9 +32,28 @@ class Api::V1::PropertiesController < ApplicationController
   end
 
   def update
+    if authorized?
+      respond_to do |format|
+        if @property.update(property_params)
+          format.json { render :show, status: :ok, location: api_v1_property_path(@property) }
+        else
+          format.json { render json: @property.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      handle_unauthorized
+    end
   end
 
   def destroy
+    if authorized?
+      @property.destroy
+      respond_to do |format|
+        format.json { head :no_content }
+      end
+    else
+      handle_unauthorized
+    end
   end
 
   private
