@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import PropertiesTable from "./PropertiesTable";
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 
 export default class Properties extends Component {
   render() {
@@ -11,6 +13,8 @@ export default class Properties extends Component {
           <h4>
           Property2
           </h4>
+
+          <PropertiesTable />
           
         </div>
       </>
