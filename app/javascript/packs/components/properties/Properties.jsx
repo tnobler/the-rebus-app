@@ -2,17 +2,18 @@ import React, { Component } from "react";
 import PropertiesTable from "./PropertiesTable";
 
 export default class Properties extends Component {
+  constructor(props) {
+    super(props)
+    
+  }
+  
   render() {
     return (
       <>
         <div>
-          <h4>
-          Property1 
-          </h4>
-          <h4>
-          Property2
-          </h4>
-          <PropertiesTable />
+          
+          
+          {this.props.children}
         
         </div>
       </>

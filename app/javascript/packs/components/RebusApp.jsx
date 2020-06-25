@@ -1,8 +1,39 @@
 import React from "react";
 import ReactDOM from "react-dom";
+
+import axios from 'axios'
+
 import Properties from "./properties/Properties";
+import Property from "./properties/Property";
+import PropertiesTable from "./properties/PropertiesTable";
 
 class RebusApp extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      properties: []
+    }
+    this.getProperties = this.getProperties.bind(this)
+  }
+
+  componentDidMount() {
+    this.getProperties()
+  }
+
+  getProperties() {
+    axios
+      .get("/api/v1/properties")
+      .then(response => {
+        const properties = response.data
+        this.setState({ properties })
+      })
+      .catch(error => {
+        console.log(error);
+        
+      })
+  }
+  
   render() {
     return (
       <>
@@ -20,10 +51,20 @@ class RebusApp extends React.Component {
               </li>
             </ul>
           </li>
+        </ul>
+        <ul>
           <li>
-            <Properties />
+            <PropertiesTable />
           </li>
-          
+        </ul>
+        <ul>
+          <li>
+            <Properties>
+              {this.state.properties.map(property => (
+                <Property key={property.id} property={property} />
+              ))}
+            </Properties>
+          </li>          
         </ul>
       </>
     );
