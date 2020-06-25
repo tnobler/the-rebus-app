@@ -2,9 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Redirect, Switch } from 'react-router-dom'
 
-import Routes from "../routes/Index"
-
-export default props => <>{Routes}</>
 // Pages
 import Dashboard from "../pages/Dashboard"
 import PageNotFound from "../pages/404";
