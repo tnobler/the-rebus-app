@@ -11,4 +11,5 @@ Rails.application.routes.draw do
       resources :properties, only: [:index, :show, :create, :update, :destroy]
     end
   end
+  get '/*path' => 'pages#home'
 end
