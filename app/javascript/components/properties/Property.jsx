@@ -69,24 +69,100 @@ export default class Property extends Component {
             className="img-fluid position-absolute"
           /> */}
           <div className="overlay bg-dark position-absolute" />
-          <h1 className="display-4 position-relative">{property.name}</h1>
+          <h1 className="display-3 position-relative">{property.name}</h1>
         </div>
+        <div className="position-relative d-flex align-items-center justify-content-center">
+          <div className="overlay bg-dark position-absolute" />
+
+          <h5 className="position-relative">fka {property.fka}</h5>
+        </div>
+
         <div className="container py-5 ml-5">
-          <div className="row">
-            <div className="col-sm-12 col-lg-3">
+          <div className="row mb-3 py-3 px-3">
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
               <ul className="list-group">
-                <h5 className="mb-2">units</h5>
-                {unitList}
+                <h5 className="mb-2">Address</h5>
+                {property.street_address}
+                <br />
+                {property.city}, {property.state} {property.zipcode}
               </ul>
             </div>
-            <div className="col-sm-12 col-lg-7">
-              <h5 className="mb-2">Deal Notes</h5>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: `${propertyNotes}`,
-                }}
-              />
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Unit Count</h5>
+                {property.unit_count}
+              </ul>
             </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Year Built</h5>
+                {property.year_built}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Analysis Year</h5>
+                {property.analysis_year}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Status:</h5>
+                {property.status}
+              </ul>
+            </div>
+
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">MSA</h5>
+                {property.msa}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Submarket</h5>
+                {property.submarket}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Broker</h5>
+                {property.broker}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Asking Price</h5>
+                {property.asking_price}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Price/Unit</h5>
+                {property.price_per_unit}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Offer Price</h5>
+                {property.offer_price}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">Sales Price</h5>
+                {property.sales_price}
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
+                <h5 className="mb-2">AE Flood Zone?</h5>
+                {property.ae_flood_zone ? "Yes" : "No"}
+              </ul>
+            </div>
+          </div>
+
+          <div>
             <div className="col-sm-12 col-lg-2">
               <button type="button" className="btn btn-danger">
                 Delete Property
