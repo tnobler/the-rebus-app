@@ -63,17 +63,15 @@ export default class Property extends Component {
       <div className="container">
         <MiniDrawer selectedIndex={2} />
         <div className="position-relative d-flex align-items-center justify-content-center">
-          <img
+          {/* <img
             src={property.photo}
             alt={`${property.name} photo`}
             className="img-fluid position-absolute"
-          />
+          /> */}
           <div className="overlay bg-dark position-absolute" />
-          <h1 className="display-4 position-relative text-white">
-            {property.name}
-          </h1>
+          <h1 className="display-4 position-relative">{property.name}</h1>
         </div>
-        <div className="container py-5">
+        <div className="container py-5 ml-5">
           <div className="row">
             <div className="col-sm-12 col-lg-3">
               <ul className="list-group">
