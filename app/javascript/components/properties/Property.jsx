@@ -13,13 +13,32 @@ export default class Property extends Component {
 
     this.addHtmlEntities = this.addHtmlEntities.bind(this);
     this.getProperty = this.getProperty.bind(this);
+    this.getEditProperty = this.getEditProperty.bind(this);
   }
 
   componentDidMount() {
     this.getProperty();
+    this.getEditProperty();
   }
 
   getProperty() {
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    axios
+      .get(`/api/v1/properties/${id}`)
+      .then((response) => {
+        const property = response.data;
+        this.setState({ property });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  getEditProperty() {
     const {
       match: {
         params: { id },
@@ -156,14 +175,32 @@ export default class Property extends Component {
             </div>
             <div className="col-sm-6 col-md-3 col-lg-2 py-3">
               <ul className="list-group">
+                <h5 className="mb-2">Notes</h5>
+                <p>{property.notes}</p>
+              </ul>
+            </div>
+            <div className="col-sm-6 col-md-3 col-lg-2 py-3">
+              <ul className="list-group">
                 <h5 className="mb-2">AE Flood Zone?</h5>
                 {property.ae_flood_zone ? "Yes" : "No"}
               </ul>
             </div>
           </div>
 
+          <div className="row mb-3">
+            <div className="col">
+              <Link
+                to={`/property/edit/${property.id}`}
+                className="btn btn-lg btn-dark"
+                role="button"
+              >
+                Edit Property
+              </Link>
+            </div>
+          </div>
+
           <div>
-            <div className="col-sm-12 col-lg-2">
+            <div className="col-sm-6 col-lg-2">
               <button type="button" className="btn btn-danger">
                 Delete Property
               </button>

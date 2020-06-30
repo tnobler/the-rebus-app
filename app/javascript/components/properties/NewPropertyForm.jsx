@@ -4,11 +4,16 @@ import axios from "axios";
 import setAxiosHeaders from "../AxiosHeaders";
 import MiniDrawer from "../../navigation/MiniDrawer";
 
-export default class PropertyForm extends Component {
+export default class NewPropertyForm extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      isChecked: false,
+    };
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleChange = this.toggleChange.bind(this);
 
     // Refs
     this.nameRef = React.createRef();
@@ -33,6 +38,16 @@ export default class PropertyForm extends Component {
     this.photoRef = React.createRef();
   }
 
+  // componentDidMount() {
+  //   this.toggleChange();
+  // }
+
+  toggleChange() {
+    this.setState({
+      isChecked: !this.state.isChecked,
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
     setAxiosHeaders();
@@ -43,10 +58,11 @@ export default class PropertyForm extends Component {
           street_address: this.streetAddressRef.current.value,
           status: this.statusRef.current.value,
           city: this.cityRef.current.value,
+          state: this.stateRef.current.value,
           zipcode: this.zipcodeRef.current.value,
           unit_count: this.unitCountRef.current.value,
           year_built: this.yearBuiltRef.current.value,
-          ae_flood_zone: this.aeFloodZoneRef.current.value,
+          ae_flood_zone: this.state.isChecked,
           msa: this.msaRef.current.value,
           submarket: this.submarketRef.current.value,
           broker: this.brokerRef.current.value,
@@ -56,18 +72,13 @@ export default class PropertyForm extends Component {
           offer_price: this.offerPriceRef.current.value,
           sales_price: this.salesPriceRef.current.value,
           fka: this.fkaRef.current.value,
+          notes: this.notesRef.current.value,
           // photo: this.photoRef.current.value,
         },
       })
       .then((response) => {
-        this.props.history.push(`/property/${response.id}`);
+        this.props.history.push(`/property/${response.data.id}`);
       })
-      // .then(response => {
-      //   const property = response.data
-      //   console.log(property);
-
-      //   // this.props.createProperty(property)
-      // })
       .catch((error) => {
         console.log(error);
       });
@@ -77,7 +88,12 @@ export default class PropertyForm extends Component {
   render() {
     return (
       <div className="container mt-3">
-        <MiniDrawer selectedIndex={null} />
+        <MiniDrawer selectedIndex={null} />.
+        <div className="row ml-3">
+          <div className="col">
+            <h2 className="ml-4 pl-2">New Property</h2>
+          </div>
+        </div>
         <div className="ml-5">
           <form onSubmit={this.handleSubmit} className="my-3">
             <div className="form-row">
@@ -120,6 +136,7 @@ export default class PropertyForm extends Component {
                   <option>Deciding</option>
                   <option>LOI Sent</option>
                   <option>Best and Final</option>
+                  <option>Offered Lost</option>
                   <option>Deal Won</option>
                   <option>Passed</option>
                   <option>Blank</option>
@@ -144,6 +161,7 @@ export default class PropertyForm extends Component {
                 <label htmlFor="city">City</label>
                 <input
                   type="text"
+                  name="city"
                   ref={this.cityRef}
                   className="form-control"
                   id="city"
@@ -151,7 +169,12 @@ export default class PropertyForm extends Component {
               </div>
               <div className="form-group col-md-4">
                 <label htmlFor="state">State</label>
-                <select id="state" ref={this.stateRef} className="form-control">
+                <select
+                  id="state"
+                  name="state"
+                  ref={this.stateRef}
+                  className="form-control"
+                >
                   <option defaultValue>Texas</option>
                   <option>Arizona</option>
                   <option>New Mexico</option>
@@ -287,13 +310,15 @@ export default class PropertyForm extends Component {
 
             <div className="form-group">
               <div className="form-check">
-                <input
-                  type="checkbox"
-                  className="form-check-input"
-                  id="aeFloodZone"
-                  ref={this.aeFloodZoneRef}
-                />
                 <label htmlFor="aeFloodZone" className="form-check-label">
+                  <input
+                    type="checkbox"
+                    className="form-check-input"
+                    id="aeFloodZone"
+                    ref={this.aeFloodZoneRef}
+                    defaultChecked={this.state.isChecked}
+                    onChange={this.toggleChange}
+                  />
                   AE Flood Zone
                 </label>
               </div>
