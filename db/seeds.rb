@@ -6,6 +6,17 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Property.all.each do |u|
+  10.times do |i|
+    u.units.create(
+      number: "unit-#{i + 1}",
+      sqft: ((i + 1) * 100),
+      budget: ((i + 1) * 1000),
+      status: i % 3 == 0 ? "In Process" : "Not Started"
+    )
+  end
+end
+
 2.times do |i|
   User.create(
     email: "user-#{i + 1}@example.com",
