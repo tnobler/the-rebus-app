@@ -1,0 +1,1 @@
+json.extract! unit, :id, :number, :property_id, :sqft, :budget, :status, :created_at, :updated_at
