@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import MiniDrawer from "../../navigation/MiniDrawer";
+import setAxiosHeaders from "../AxiosHeaders";
 
 export default class Property extends Component {
   constructor(props) {
@@ -14,11 +15,31 @@ export default class Property extends Component {
     this.addHtmlEntities = this.addHtmlEntities.bind(this);
     this.getProperty = this.getProperty.bind(this);
     this.getEditProperty = this.getEditProperty.bind(this);
+    this.deleteProperty = this.deleteProperty.bind(this);
+    // this.path = `/api/v1/properties/${property.id}`;
   }
 
   componentDidMount() {
     this.getProperty();
     this.getEditProperty();
+  }
+
+  deleteProperty() {
+    setAxiosHeaders();
+    const {
+      match: {
+        params: { id },
+      },
+    } = this.props;
+    const confirmation = confirm("Are you sure?");
+    if (confirmation) {
+      axios
+        .delete(`/api/v1/properties/${id}`)
+        .then(this.props.history.push(`/properties`))
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   getProperty() {
@@ -29,10 +50,7 @@ export default class Property extends Component {
     } = this.props;
     axios
       .get(`/api/v1/properties/${id}`)
-      .then((response) => {
-        const property = response.data;
-        this.setState({ property });
-      })
+      .then((response) => {})
       .catch((error) => {
         console.log(error);
       });
@@ -200,8 +218,12 @@ export default class Property extends Component {
           </div>
 
           <div>
-            <div className="col-sm-6 col-lg-2">
-              <button type="button" className="btn btn-danger">
+            <div className="col">
+              <button
+                type="button"
+                className="btn btn-danger"
+                onClick={this.deleteProperty}
+              >
                 Delete Property
               </button>
             </div>
