@@ -12,4 +12,6 @@ class Property < ApplicationRecord
   # validates :year_built, presence: true
   # validates :msa, presence: true
   # validates :analysis_year, presence: true
+
+  has_many :units
 end
