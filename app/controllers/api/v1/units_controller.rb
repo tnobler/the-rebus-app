@@ -3,7 +3,7 @@ class Api::V1::UnitsController < ApplicationController
   before_action :set_unit, only: [:show, :edit, :update, :destroy]
 
   def index
-    @units = Unit.all
+    @units = current_user.units.all
   end
 
   def show
@@ -25,7 +25,7 @@ class Api::V1::UnitsController < ApplicationController
       end
 
       def authorized?
-        @unit.property.user == current_user
+        @unit.user == current_user
       end
 
       def handle_unauthorized
